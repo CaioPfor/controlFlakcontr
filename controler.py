@@ -39,9 +39,9 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('download_file', name=filename))
 
-            @app.route('/uploads/<name>')
-            def download_file(name):
+    @app.route('/uploads/<name>')
+    def download_file(name):
                  return send_from_directory(app.config["UPLOAD_FOLDER"], name)
 
-            if __name__ == '__main__':
+    if __name__ == '__main__':
                 app.run(debug = True)
