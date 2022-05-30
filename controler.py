@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory, jsonify
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/controlFlak'
+UPLOAD_FOLDER = '/controlFlakcontr'
 
 ALLOWED_EXTENSIONS = {'xlsx'}
 
