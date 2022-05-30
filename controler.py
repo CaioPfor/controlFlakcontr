@@ -9,12 +9,12 @@ if __name__=='main':
 
 
 
-DIRETORIO = "/controlFlakcontr"
+DIRETORIO = "/controlFlak"
 
 api = Flask(__name__)
 
 
-@api.route("/controlFlakcontr", methods=["GET"])
+@api.route("/controlFlak", methods=["GET"])
 def lista_arquivos():
     arquivos = []
 
@@ -27,12 +27,12 @@ def lista_arquivos():
     return jsonify(arquivos)
 
 
-@api.route("/controlFlakcontr/<nome_do_arquivo>",  methods=["GET"])
+@api.route("/controlFlak/<nome_do_arquivo>",  methods=["GET"])
 def get_arquivo(nome_do_arquivo):
     return send_from_directory(DIRETORIO, nome_do_arquivo, as_attachment=True)
 
 
-@api.route("/controlFlakcontr", methods=["POST"])
+@api.route("/controlFlak", methods=["POST"])
 def post_arquivo():
     arquivo = request.files.get("meuArquivo")
 
