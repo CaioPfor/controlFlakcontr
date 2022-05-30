@@ -1,2 +1,1 @@
 FLASK_APP=controler.py
-FLASK_ENV=development
