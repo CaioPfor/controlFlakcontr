@@ -46,8 +46,8 @@ def upload_file():
 
 
 
-            @app.route('/uploads/<name>')
-            def download_file(name):
+@app.route('/uploads/<name>')
+def download_file(name):
                   return send_from_directory(app.config["UPLOAD_FOLDER"], name)
 
 if __name__ == '__main__':
