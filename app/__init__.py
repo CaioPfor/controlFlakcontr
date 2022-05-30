@@ -9,7 +9,7 @@ from flask import send_from_directory, jsonify
 
 
 
-UPLOAD_FOLDER = './controlFlakcontr'
+UPLOAD_FOLDER = 'controlFlakcontr'
 
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv', 'xlsx'}
