@@ -9,7 +9,7 @@ if __name__=='main':
 
 
 
-DIRETORIO = "controlFlakcontr"
+DIRETORIO = "/controlFlakcontr"
 
 api = Flask(__name__)
 
