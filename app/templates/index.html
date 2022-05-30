@@ -23,13 +23,10 @@
   
 <img src="{{ url_for('static', filename='img.png') }}">
 
-<form   action="http://127.0.0.1:5000/controlFlak" 
-        method="POST" 
-        enctype="multipart/form-data">
-    <label for="meuArquivo">Upload Arquivo</label><br>
-    <input type="file" id="meuArquivo" name="meuArquivo"><br>
-    <input type="submit" value="Enviar">
-</form> 
+ <h1>File Upload</h1>
+<form method="POST" action="" enctype="multipart/form-data">
+<p><input type="file" name="file"></p>
+<p><input type="submit" value="Submit"></p>
 
  
 

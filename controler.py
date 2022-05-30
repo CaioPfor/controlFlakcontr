@@ -1,47 +1,47 @@
 from app import app
 import os
 from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
+from flask import send_from_directory, jsonify
 
+app = Flask(__name__)
+UPLOAD_FOLDER = '/controlFlak'
 
-if __name__=='main':
-    port = int(os.getenv('PORT'), '5000')
-    app.run(host='0.0.0.0', port= port)
+ALLOWED_EXTENSIONS = {'xlsx'}
 
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-DIRETORIO = "/controlFlak"
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        
+        # verifique se a solicitacao de postagem tem a parte do arquivo
+        if 'file' not in request.files:
+            flash('Nao tem a parte do arquivo')
+            return redirect(request.url)
+        file = request.files['file']
+        
+        # Se o usuario nao selecionar um arquivo, o navegador envia um
+        # arquivo vazio sem um nome de arquivo.
+        
+        if file.filename == '':
+            flash('Nenhum arquivo selecionado')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('download_file', name=filename))
 
-api = Flask(__name__)
+            @app.route('/uploads/<name>')
+            def download_file(name):
+                 return send_from_directory(app.config["UPLOAD_FOLDER"], name)
 
-
-@api.route("/controlFlak", methods=["GET"])
-def lista_arquivos():
-    arquivos = []
-
-    for nome_do_arquivo in os.listdir(DIRETORIO):
-        endereco_do_arquivo = os.path.join(DIRETORIO, nome_do_arquivo)
-
-        if(os.path.isfile(endereco_do_arquivo)):
-            arquivos.append(nome_do_arquivo)
-
-    return jsonify(arquivos)
-
-
-@api.route("/controlFlak/<nome_do_arquivo>",  methods=["GET"])
-def get_arquivo(nome_do_arquivo):
-    return send_from_directory(DIRETORIO, nome_do_arquivo, as_attachment=True)
-
-
-@api.route("/controlFlak", methods=["POST"])
-def post_arquivo():
-    arquivo = request.files.get("meuArquivo")
-
-    print(arquivo)
-    nome_do_arquivo = arquivo.filename
-    arquivo.save(os.path.join(DIRETORIO, nome_do_arquivo))
-
-    return '', 201
-
-
-if __name__ == "__main__":
-    api.run(debug=True, port=5000)    
+            if __name__ == '__main__':
+                app.run(debug = True)
