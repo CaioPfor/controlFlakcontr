@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT controlFlak:app
+web: gunicorn -b :$PORT controler:app
