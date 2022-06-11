@@ -14,7 +14,7 @@ from flask import send_from_directory, jsonify
 
 
 def index():
-    nome=PeixeStock
+    nome=PeixeStock#aqui é o tap rolando.
     return render_template('index.html',n=nome)
 
 

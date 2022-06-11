@@ -17,20 +17,24 @@
 
 
 
-    <h2>ola galera</h2>
+    <h2>ola galeraffffffffffffffff</h2>
    <p>{{n}}</p>
+   
    
   
 <img src="{{ url_for('static', filename='img.png') }}">
 
 
 <h1>File Upload</h1>
-        <form method="POST" action="" enctype="multipart/form-data">
-        <p><input type="file" name="file"></p>
-        <p><input type="submit" value="Submit"></p>
-        </form>
- 
-
+     
+   <!-- O tipo de encoding de dados, enctype, DEVE ser especificado abaixo -->
+<form enctype="multipart/form-data" action="__URL__" method="POST">
+    <!-- MAX_FILE_SIZE deve preceder o campo input -->
+    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+    <!-- O Nome do elemento input determina o nome da array $_FILES -->
+    Enviar esse arquivo: <input name="userfile" type="file" />
+    <input type="submit" value="Enviar arquivo" />
+</form>
 
    
 </body>
