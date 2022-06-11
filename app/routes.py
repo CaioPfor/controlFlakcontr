@@ -14,17 +14,15 @@ from flask_sock import Sock
 
 
 
-
-
-
-
-def index(sock):
+def index():
     nome=PeixeStock#aqui é o tap rolando.
     return render_template('index.html',n=nome)
-    
 
 
-
+def revese(ws) :
+    while True:
+        text = ws.revese()
+        ws.send(text[::-1])
 
 
 
